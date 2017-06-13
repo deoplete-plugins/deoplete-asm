@@ -2,6 +2,77 @@
 # This conversion list acquired from https://github.com/Maratyszcza/Opcodes/raw/master/opcodes/x86_64.xml
 
 class go(object):
+    symbols = [
+        {
+            'word': 'FP',
+            'abbr': 'FP',
+            'kind': 'Frame pointer: arguments and locals.',
+            'info': 'FP Frame pointer: arguments and locals.',
+            'dup': 1
+        },
+        {
+            'word': 'PC',
+            'abbr': 'PC',
+            'kind': 'Program counter: jumps and branches.',
+            'info': 'PC Program counter: jumps and branches.',
+            'dup': 1
+        },
+        {
+            'word': 'SB',
+            'abbr': 'SB',
+            'kind': 'Static base pointer: global symbols.',
+            'info': 'SB Static base pointer: global symbols.',
+            'dup': 1
+        },
+        {
+            'word': 'SP',
+            'abbr': 'SP',
+            'kind': 'Stack pointer: top of stack.',
+            'info': 'SP Stack pointer: top of stack.',
+            'dup': 1
+        },
+        {
+            'word': 'DATA',
+            'abbr': 'DATA',
+            # TODO(zchee):
+            # 'kind': ,
+            # 'info': ,
+            'dup': 1
+        },
+        {
+            'word': 'GLOBL',
+            'abbr': 'GLOBL',
+            # TODO(zchee):
+            # 'kind': ,
+            # 'info': ,
+            'dup': 1
+        },
+        {
+            'word': 'FUNCDATA',
+            'abbr': 'FUNCDATA',
+            # TODO(zchee):
+            # 'kind': ,
+            # 'info': ,
+            'dup': 1
+        },
+        {
+            'word': 'PCDATA',
+            'abbr': 'PCDATA',
+            # TODO(zchee):
+            # 'kind': ,
+            # 'info': ,
+            'dup': 1
+        },
+        {
+            'word': 'TEXT',
+            'abbr': 'TEXT',
+            # TODO(zchee):
+            # 'kind': ,
+            # 'info': ,
+            'dup': 1
+        },
+    ]
+
     mnemonics = dict({
         'adcb': 'ADCB',
         'adcw': 'ADCW',

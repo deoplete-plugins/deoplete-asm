@@ -42,6 +42,8 @@ class Source(Base):
             if self.go_mode:
                 from go_opcode import go
 
+                self.result += go.symbols
+
             for section in self.instructions.instruction_sections:
                 for instructions in section.instruction_table.instructions:
                     kind = instructions.description
