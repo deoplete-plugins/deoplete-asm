@@ -19,6 +19,7 @@ class Source(Base):
         self.filetypes = ['gas', 'masm']  # TODO(zchee): not loading masm filetype
 
         self.instructions = intel_sdm.SdmDocument()
+        self.result = []  # for cache
 
     def on_init(self, context):
         pb = '{}/pb/instructions.sdm.pb'.format(os.path.dirname(__file__))
@@ -34,26 +35,25 @@ class Source(Base):
         return m.start() if m else -1
 
     def gather_candidates(self, context):
-        out = []
+        if not self.result:
+            for section in self.instructions.instruction_sections:
+                for instructions in section.instruction_table.instructions:
+                    if instructions.vendor_syntax.mnemonic:
+                        vendor_syntax = instructions.vendor_syntax
+                        mnemonic = str(vendor_syntax.mnemonic).lower()
+                        operand = ''
+                        for i, op in enumerate(vendor_syntax.operands):
+                            operand += op.name
+                            if i < len(vendor_syntax.operands)-1:
+                                operand += ', '
+                        abbr = '{} {}'.format(mnemonic, operand)
+                        self.result.append(
+                            dict(
+                                word=mnemonic,
+                                abbr=abbr,
+                                kind=instructions.description,
+                                info=abbr,
+                                dup=1)
+                        )
 
-        for section in self.instructions.instruction_sections:
-            for instructions in section.instruction_table.instructions:
-                if instructions.vendor_syntax.mnemonic:
-                    vendor_syntax = instructions.vendor_syntax
-                    mnemonic = vendor_syntax.mnemonic
-                    operand = ''
-                    for i, op in enumerate(vendor_syntax.operands):
-                        operand += op.name
-                        if i < len(vendor_syntax.operands)-1:
-                            operand += ', '
-                    abbr = '{} {}'.format(mnemonic, operand)
-                    out.append(
-                        dict(
-                            word=mnemonic,
-                            abbr=abbr,
-                            kind=instructions.description,
-                            info=abbr,
-                            dup=1)
-                    )
-
-        return out
+        return self.result
