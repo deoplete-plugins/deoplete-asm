@@ -1,6 +1,6 @@
 gen_go_opcode:
-	rm -f ./rplugin/python3/deoplete/sources/go_opcode.py
-	./tools/gen_goopcode.py > ./rplugin/python3/deoplete/sources/go_opcode.py
+	rm -f ./Rplugin/python3/deoplete/sources/opcode.py
+	./tools/gen_goopcode.py > ./rplugin/python3/deoplete/sources/opcode.py
 
 docker:
 ifeq ($(shell command -v docker 2> /dev/null),)
