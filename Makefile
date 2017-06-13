@@ -4,7 +4,7 @@ ifeq ($(shell command -v docker 2> /dev/null),)
 endif
 
 docker/build: docker
-	docker build --rm -t zchee/deoplete-asm -f dockerfiles/Dockerfile .
+	docker build --rm -t zchee/deoplete-asm -f docker/Dockerfile .
 
 dump_protobuf: docker/build
 	docker run --rm zchee/deoplete-asm > rplugin/python3/deoplete/sources/pb/instructions.sdm.pb
