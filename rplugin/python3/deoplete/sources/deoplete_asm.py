@@ -38,22 +38,21 @@ class Source(Base):
         if not self.result:
             for section in self.instructions.instruction_sections:
                 for instructions in section.instruction_table.instructions:
-                    if instructions.vendor_syntax.mnemonic:
-                        vendor_syntax = instructions.vendor_syntax
-                        mnemonic = str(vendor_syntax.mnemonic).lower()
-                        operand = ''
-                        for i, op in enumerate(vendor_syntax.operands):
-                            operand += op.name
-                            if i < len(vendor_syntax.operands)-1:
-                                operand += ', '
-                        abbr = '{} {}'.format(mnemonic, operand)
-                        self.result.append(
-                            dict(
-                                word=mnemonic,
-                                abbr=abbr,
-                                kind=instructions.description,
-                                info=abbr,
-                                dup=1)
-                        )
+                    vendor_syntax = instructions.vendor_syntax
+                    mnemonic = str(vendor_syntax.mnemonic).lower()
+                    operand = ''
+                    for i, op in enumerate(vendor_syntax.operands):
+                        operand += op.name
+                        if i < len(vendor_syntax.operands)-1:
+                            operand += ', '
+                    abbr = '{} {}'.format(mnemonic, operand)
+                    self.result.append(
+                        dict(
+                            word=mnemonic,
+                            abbr=abbr,
+                            kind=instructions.description,
+                            info=abbr,
+                            dup=1)
+                    )
 
         return self.result
