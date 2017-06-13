@@ -29,6 +29,13 @@ See [google/EXEgesis/README.md#whats-next](https://github.com/google/EXEgesis#wh
 
 - Intel x86-64
 
+## Config
+
+### `g:deoplete#sources#asm#go_mode`
+
+If set `1`, Use Go Plan9 assembly mode.  
+Let's try test edit [testdata/cpuid_amd64.s](testdata/cpuid_amd64.s) with `1`.
+
 ## Update protobuf binary
 
 just `make dump_protobuf`.  
