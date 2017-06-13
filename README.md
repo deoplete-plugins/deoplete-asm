@@ -42,6 +42,11 @@ just `make dump_protobuf`.
 Required `docker` engine. See also [Dockerfile](docker/Dockerfile).
 
 
+## TODO
+
+- Support registers
+
+
 [deoplete.nvim]: https://github.com/Shougo/deoplete.nvim
 [EXEgesis]: https://github.com/google/EXEgesis
 [intel-64-ia-32-architectures-instruction-set-reference-manual]: https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf
