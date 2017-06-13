@@ -1,3 +1,7 @@
+gen_go_opcode:
+	rm -f ./rplugin/python3/deoplete/sources/go_opcode.py
+	./tools/gen_goopcode.py > ./rplugin/python3/deoplete/sources/go_opcode.py
+
 docker:
 ifeq ($(shell command -v docker 2> /dev/null),)
 	$(error no such command: $@)
@@ -9,4 +13,4 @@ docker/build: docker
 dump_protobuf: docker/build
 	docker run --rm zchee/deoplete-asm > rplugin/python3/deoplete/sources/pb/instructions.sdm.pb
 
-.PHONY: docker docker/build dump_protobuf
+.PHONY: gen_go_opcode docker docker/build dump_protobuf
