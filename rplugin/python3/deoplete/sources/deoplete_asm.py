@@ -40,7 +40,7 @@ class Source(Base):
     def gather_candidates(self, context):
         if not self.result:
             if self.go_mode:
-                from go_opcode import go
+                from .opcode import go
 
                 self.result += go.symbols
 
