@@ -1,5 +1,5 @@
 .git
-dockerfiles
+docker
 rplugin
 testdata
 .dockerignore
@@ -7,3 +7,4 @@ testdata
 .gitignore
 LICENSE
 README.md
+Makefile
