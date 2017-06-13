@@ -43,7 +43,7 @@ class Source(Base):
                     operand = ''
                     for i, op in enumerate(vendor_syntax.operands):
                         operand += op.name
-                        if i < len(vendor_syntax.operands)-1:
+                        if i < len(vendor_syntax.operands) - 1:
                             operand += ', '
                     abbr = '{} {}'.format(mnemonic, operand)
                     self.result.append(
