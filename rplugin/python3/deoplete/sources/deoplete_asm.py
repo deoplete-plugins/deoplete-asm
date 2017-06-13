@@ -22,6 +22,9 @@ class Source(Base):
         self.result = []  # for cache
 
     def on_init(self, context):
+        vars = context['vars']
+        self.go_mode = vars.get('deoplete#sources#asm#go_mode', False)
+
         pb = '{}/pb/instructions.sdm.pb'.format(os.path.dirname(__file__))
         try:
             f = open(pb, "rb")  # binary mode for predump protobuf data
@@ -36,21 +39,34 @@ class Source(Base):
 
     def gather_candidates(self, context):
         if not self.result:
+            if self.go_mode:
+                from go_opcode import go
+
             for section in self.instructions.instruction_sections:
                 for instructions in section.instruction_table.instructions:
+                    kind = instructions.description
+
                     vendor_syntax = instructions.vendor_syntax
                     mnemonic = str(vendor_syntax.mnemonic).lower()
+                    if self.go_mode:
+                        try:
+                            kind = '({}) {}'.format(mnemonic, kind)
+                            mnemonic = go.mnemonics[mnemonic]
+                        except Exception:
+                            continue
+
                     operand = ''
                     for i, op in enumerate(vendor_syntax.operands):
                         operand += op.name
                         if i < len(vendor_syntax.operands) - 1:
                             operand += ', '
                     abbr = '{} {}'.format(mnemonic, operand)
+
                     self.result.append(
                         dict(
                             word=mnemonic,
                             abbr=abbr,
-                            kind=instructions.description,
+                            kind=kind,
                             info=abbr,
                             dup=1)
                     )

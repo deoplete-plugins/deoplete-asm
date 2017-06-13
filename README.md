@@ -34,10 +34,6 @@ See [google/EXEgesis/README.md#whats-next](https://github.com/google/EXEgesis#wh
 just `make dump_protobuf`.  
 Required `docker` engine. See also [Dockerfile](docker/Dockerfile).
 
-## TODO
-
-- Support Go plan9 assembly instructions
-
 
 [deoplete.nvim]: https://github.com/Shougo/deoplete.nvim
 [EXEgesis]: https://github.com/google/EXEgesis
