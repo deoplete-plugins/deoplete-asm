@@ -16,7 +16,7 @@ class Source(Base):
         self.name = 'asm'
         self.mark = '[asm]'
         self.rank = 500
-        self.filetypes = ['gas', 'masm']  # TODO(zchee): not loading masm filetype
+        self.filetypes = ['gas', 'masm']
 
         self.instructions = intel_sdm.SdmDocument()
         self.result = []  # for cache
