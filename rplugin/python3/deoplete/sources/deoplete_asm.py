@@ -16,7 +16,7 @@ class Source(Base):
         self.name = 'asm'
         self.mark = '[asm]'
         self.rank = 500
-        self.filetypes = ['gas', 'masm']
+        self.filetypes = ['gas', 'asm', 'anm68k', 'asmh8300', 'ia64', 'masm', 'nasm', 'tasm']
 
         self.instructions = intel_sdm.SdmDocument()
         self.result = []  # for cache
