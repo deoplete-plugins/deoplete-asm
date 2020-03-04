@@ -1,15 +1,18 @@
 import os
 import re
 
+from typing import List, Any
+
 from .base import Base
 from deoplete.util import error, load_external_module
+from deoplete.util import Nvim, UserContext, Candidates
 
 load_external_module(__file__, "")
 from exegesis.proto.pdf.x86 import intel_sdm_pb2 as intel_sdm  # noqa: E261
 
 
 class Source(Base):
-    def __init__(self, vim):
+    def __init__(self, vim: Nvim) -> None:
         super(Source, self).__init__(vim)
 
         self.name = "asm"
@@ -28,10 +31,10 @@ class Source(Base):
         ]
         self.input_pattern = "[^.'\" \t0-9]\\.\\w*"
 
-        self.instructions = intel_sdm.SdmDocument()
-        self.result = []  # for cache
+        self.instructions: Any = intel_sdm.SdmDocument()
+        self.result: List = []  # for cache
 
-    def on_init(self, context):
+    def on_init(self, context: UserContext) -> None:
         vars = context["vars"]
         self.go_mode = vars.get("deoplete#sources#asm#go_mode", False)
 
@@ -43,11 +46,11 @@ class Source(Base):
         except IOError:
             error(self.vim, "could not open {}".format(pb))
 
-    def get_complete_position(self, context):
+    def get_complete_position(self, context: UserContext) -> int:
         m = re.search(r"\w*$", context["input"])
         return m.start() if m else -1
 
-    def gather_candidates(self, context):
+    def gather_candidates(self, context: UserContext) -> Candidates:
         if not self.result:
             if self.go_mode:
                 from sources.opcode import go
